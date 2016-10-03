@@ -14,6 +14,7 @@
     <ClInclude Include="deque.h" />
     <ClInclude Include="deque.hpp" />
     <ClInclude Include="dequetest.h" />
+    <ClInclude Include="dequeheader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dequetest.cpp" />

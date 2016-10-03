@@ -4,47 +4,48 @@
 template <typename DEQUE_DATA_TYPE> 
 void dsDEQUE<DEQUE_DATA_TYPE>::PushBack (const DEQUE_DATA_TYPE & newData)
 {
-  if (Tail == NULL) {
-     Tail = static_cast<DLIST *>(malloc(sizeof(DLIST)));
-     Head = Tail;
-     Tail->Prev = NULL;
+  if (tail == NULL) {
+     tail = new DLIST;
+     head = tail;
+     tail->prev = NULL;
   } else {
-     Tail->Next = static_cast<DLIST *>(malloc(sizeof(DLIST)));
-     DLIST *tempPointer = Tail;
-     Tail = Tail->Next;
-     Tail->Prev = tempPointer;
+     tail->next = new DLIST;
+     DLIST * tempPointer = tail;
+     tail = tail->next;
+     tail->prev = tempPointer;
   }
 
-  Tail->Data = newData;
-  Tail->Next = NULL;
+  tail->data = newData;
+  tail->next = NULL;
 }
 
 template <typename DEQUE_DATA_TYPE> 
 void dsDEQUE<DEQUE_DATA_TYPE>::PushFront (const DEQUE_DATA_TYPE & newData)
 {
-  if (Head == NULL) {
-    Head = static_cast<DLIST *>(malloc(sizeof(DLIST)));
-    Tail = Head;
+  if (head == NULL) {
+    head = new DLIST;
+    tail = head;
   } else {
-    DLIST *newNode = static_cast<DLIST *>(malloc(sizeof(DLIST)));
-    newNode->Next = Head;
-    Head->Prev = newNode;
-    Head = newNode;
+    DLIST * newNode = new DLIST;
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
   }
 
-  Head->Data = newData;
-  Head->Prev = NULL;
+  head->data = newData;
+  head->prev = NULL;
 }
 
 template <typename DEQUE_DATA_TYPE> 
 DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopBack (void)
 {
-  assert(Tail != NULL);
+  assert(tail != NULL);
 
-  DEQUE_DATA_TYPE returnData = Tail->Data;  DLIST *p = Tail;  Tail = Tail->Prev;  free(p);
+  DEQUE_DATA_TYPE returnData = tail->data;  DLIST * p = tail;  tail = tail->prev;  delete(p);
 
-  if (Tail == NULL)
-    Head = NULL;
+  if (tail == NULL) {
+    head = NULL;
+  }
 
   return returnData;
 }
@@ -52,28 +53,42 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopBack (void)
 template <typename DEQUE_DATA_TYPE> 
 DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopFront (void)
 {
-  assert(Head != NULL);
+  assert(head != NULL);
 
-  DEQUE_DATA_TYPE returnData = Head->Data;  DLIST *p = Head;  Head = Head->Next;  free(p);
-  Head->Prev = NULL;
+  DEQUE_DATA_TYPE returnData = head->data;  DLIST * p = head;  head = head->next;  delete(p);
+  head->prev = NULL;
 
-  if (Head == NULL)
-    Tail = NULL;
+  if (head == NULL) {
+    tail = NULL;
+  }
 
   return returnData;
 }
 
 template <typename DEQUE_DATA_TYPE> 
-bool dsDEQUE<DEQUE_DATA_TYPE>::IsDataContains (const DEQUE_DATA_TYPE & newData)
+bool dsDEQUE<DEQUE_DATA_TYPE>::IsDataContains (const DEQUE_DATA_TYPE & data)
 {
-  //TODO: finish IsDataContains
+  DLIST * p = head;
+
+  if (Head == NULL) {
+     return false;
+  }
+
+  while (p != tail) {
+     if (p->data == data) {
+        return true;
+     }
+  }
+
+  return false;
 }
 
 template <typename DEQUE_DATA_TYPE>
 void dsDEQUE<DEQUE_DATA_TYPE>::Clear (void)
 {
-  while (Head != NULL)
+  while (head != NULL) {
      PopFront();
+  }
 }
 
 #endif // _DEQUE_HPP_
