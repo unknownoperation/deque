@@ -10,18 +10,10 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="deque\source\deque.h" />
-    <ClInclude Include="deque\source\deque.hpp" />
-    <ClInclude Include="deque\source\common.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="deque\source\main.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9C1F0616-BE8A-46EA-ACF8-19F966B2D444}</ProjectGuid>
+    <ProjectGuid>{84CD6285-D688-48C6-A449-F0E4E8270A55}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>deque</RootNamespace>
+    <RootNamespace>dequetester</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -83,6 +75,9 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="source\main.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,7 +1,7 @@
 #ifndef _DEQUE_H_
 #define _DEQUE_H_
 
-#include "dequeheader.h"
+#include "common.h"
 
 template <typename DEQUE_DATA_TYPE> 
 class dsDEQUE {

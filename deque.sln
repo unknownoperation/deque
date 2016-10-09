@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "deque", "deque.vcxproj", "{9C1F0616-BE8A-46EA-ACF8-19F966B2D444}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dequetester", "dequetester\dequetester.vcxproj", "{84CD6285-D688-48C6-A449-F0E4E8270A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{9C1F0616-BE8A-46EA-ACF8-19F966B2D444}.Debug|Win32.Build.0 = Debug|Win32
 		{9C1F0616-BE8A-46EA-ACF8-19F966B2D444}.Release|Win32.ActiveCfg = Release|Win32
 		{9C1F0616-BE8A-46EA-ACF8-19F966B2D444}.Release|Win32.Build.0 = Release|Win32
+		{84CD6285-D688-48C6-A449-F0E4E8270A55}.Debug|Win32.ActiveCfg = Debug|Win32
+		{84CD6285-D688-48C6-A449-F0E4E8270A55}.Debug|Win32.Build.0 = Debug|Win32
+		{84CD6285-D688-48C6-A449-F0E4E8270A55}.Release|Win32.ActiveCfg = Release|Win32
+		{84CD6285-D688-48C6-A449-F0E4E8270A55}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

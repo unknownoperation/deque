@@ -15,18 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="deque\source\deque.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="deque\source\deque.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="deque\source\common.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="deque\source\main.cpp">
+    <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

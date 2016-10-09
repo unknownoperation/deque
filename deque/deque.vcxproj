@@ -11,12 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="deque\source\deque.h" />
-    <ClInclude Include="deque\source\deque.hpp" />
-    <ClInclude Include="deque\source\common.h" />
+    <ClInclude Include="deque.h" />
+    <ClInclude Include="deque.hpp" />
+    <ClInclude Include="dequetest.h" />
+    <ClInclude Include="dequeheader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="deque\source\main.cpp" />
+    <ClCompile Include="dequetest.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9C1F0616-BE8A-46EA-ACF8-19F966B2D444}</ProjectGuid>

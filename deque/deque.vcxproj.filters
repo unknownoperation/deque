@@ -15,18 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="deque\source\deque.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="deque.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="deque\source\deque.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="deque.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="deque\source\common.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="dequetest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dequeheader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="deque\source\main.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dequetest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
