@@ -41,7 +41,10 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopBack (void)
 {
   assert(tail != NULL);
 
-  DEQUE_DATA_TYPE returnData = tail->data;  DLIST * p = tail;  tail = tail->prev;  delete(p);
+  DEQUE_DATA_TYPE returnData = tail->data;
+  DLIST * p = tail;
+  tail = tail->prev;
+  delete(p);
 
   if (tail == NULL) {
     head = NULL;
@@ -55,11 +58,15 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopFront (void)
 {
   assert(head != NULL);
 
-  DEQUE_DATA_TYPE returnData = head->data;  DLIST * p = head;  head = head->next;  delete(p);
-  head->prev = NULL;
-
+  DEQUE_DATA_TYPE returnData = head->data;
+  DLIST * p = head;
+  head = head->next;
+  delete(p);
+  
   if (head == NULL) {
     tail = NULL;
+  } else {
+     head->prev = NULL;
   }
 
   return returnData;
