@@ -17,6 +17,7 @@ void dsDEQUE<DEQUE_DATA_TYPE>::PushBack (const DEQUE_DATA_TYPE & newData)
 
   tail->data = newData;
   tail->next = NULL;
+  length++;
 }
 
 template <typename DEQUE_DATA_TYPE> 
@@ -25,6 +26,7 @@ void dsDEQUE<DEQUE_DATA_TYPE>::PushFront (const DEQUE_DATA_TYPE & newData)
   if (head == NULL) {
     head = new DLIST;
     tail = head;
+    head->next = NULL;
   } else {
     DLIST * newNode = new DLIST;
     newNode->next = head;
@@ -34,6 +36,7 @@ void dsDEQUE<DEQUE_DATA_TYPE>::PushFront (const DEQUE_DATA_TYPE & newData)
 
   head->data = newData;
   head->prev = NULL;
+  length++;
 }
 
 template <typename DEQUE_DATA_TYPE> 
@@ -50,17 +53,21 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopBack (void)
     head = NULL;
   }
 
+  length--;
+
   return returnData;
 }
 
-template <typename DEQUE_DATA_TYPE> 
+template <typename DEQUE_DATA_TYPE>
 DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopFront (void)
 {
   assert(head != NULL);
 
   DEQUE_DATA_TYPE returnData = head->data;
   DLIST * p = head;
-  head = head->next;
+  if (head != NULL) {
+     head = head->next;
+  }
   delete(p);
   
   if (head == NULL) {
@@ -69,25 +76,30 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopFront (void)
      head->prev = NULL;
   }
 
+  length--;
+
   return returnData;
 }
 
 template <typename DEQUE_DATA_TYPE> 
-bool dsDEQUE<DEQUE_DATA_TYPE>::IsDataContains (const DEQUE_DATA_TYPE & data)
+int dsDEQUE<DEQUE_DATA_TYPE>::GetIndexByData (const DEQUE_DATA_TYPE & data)
 {
   DLIST * p = head;
 
-  if (Head == NULL) {
-     return false;
+  if (head == NULL) {
+     return -1;
   }
 
+  int i = 0;
   while (p != tail) {
      if (p->data == data) {
-        return true;
+        return i;
      }
+     p = p->next;
+     i++;
   }
 
-  return false;
+  return -1;
 }
 
 template <typename DEQUE_DATA_TYPE>
@@ -96,6 +108,29 @@ void dsDEQUE<DEQUE_DATA_TYPE>::Clear (void)
   while (head != NULL) {
      PopFront();
   }
+}
+
+template <typename DEQUE_DATA_TYPE>
+bool dsDEQUE<DEQUE_DATA_TYPE>::IsEmpty (void)
+{
+  if (head == NULL && tail == NULL)
+     return true;
+  return false;
+}
+
+template <typename DEQUE_DATA_TYPE>
+DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::operator[] (int index)
+{
+   assert(length > index);
+   
+   int     i    = 0;
+   DLIST * temp = head;
+
+   while (i++ < index) {
+      temp = temp->next;
+   }
+
+   return temp->data;
 }
 
 #endif // _DEQUE_HPP_
