@@ -13,28 +13,30 @@ public:
    void              PushFront   (const DEQUE_DATA_TYPE & newData);
    DEQUE_DATA_TYPE   PopBack     (void);
    DEQUE_DATA_TYPE   PopFront    (void);
-   DEQUE_DATA_TYPE   GetHeadData (void)                             { return head->data; }
-   DEQUE_DATA_TYPE   GetTailData (void)                             { return tail->data; }
-   DEQUE_DATA_TYPE   operator[]  (int index);
+   DEQUE_DATA_TYPE & Front       (void)      const                  { return head->data; }
+   DEQUE_DATA_TYPE & Back        (void)      const                  { return tail->data; }
+   DEQUE_DATA_TYPE & operator[]  (int index) const;
 
-   int  GetLength      (void)                           { return length; }
-   bool IsEmpty        (void);
-   void Clear          (void);
-   int  GetIndexByData (const DEQUE_DATA_TYPE & data);
-   void AppendDeque    (const dsDEQUE & appendedDeque);
+   int  GetLength       (void) const                         { return length; }
+   bool IsEmpty         (void) const;
+   void Clear           (void);
+   int  FindIndexByData (const DEQUE_DATA_TYPE & data) const;
 
 private:
    struct DLIST {
-     DEQUE_DATA_TYPE data;
-     DLIST * next;
-     DLIST * prev;
+      DEQUE_DATA_TYPE data;
+      DLIST * next;
+      DLIST * prev;
    };
-
-   int length;
 
    DLIST * head;
    DLIST * tail;
+
+   int length;
 };
+
+template <typename DEST_CONTAINER_TYPE, typename SRC_CONTAINER_TYPE>
+void AppendContainer (DEST_CONTAINER_TYPE & dest, const SRC_CONTAINER_TYPE & appendedDeque);
 
 #include "deque.hpp"
 

@@ -82,7 +82,7 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopFront (void)
 }
 
 template <typename DEQUE_DATA_TYPE> 
-int dsDEQUE<DEQUE_DATA_TYPE>::GetIndexByData (const DEQUE_DATA_TYPE & data)
+int dsDEQUE<DEQUE_DATA_TYPE>::FindIndexByData (const DEQUE_DATA_TYPE & data) const
 {
   DLIST * p = head;
 
@@ -111,15 +111,17 @@ void dsDEQUE<DEQUE_DATA_TYPE>::Clear (void)
 }
 
 template <typename DEQUE_DATA_TYPE>
-bool dsDEQUE<DEQUE_DATA_TYPE>::IsEmpty (void)
+bool dsDEQUE<DEQUE_DATA_TYPE>::IsEmpty (void) const
 {
-  if (head == NULL && tail == NULL)
+  if (head == NULL) {
+     assert(tail == NULL);
      return true;
+  }
   return false;
 }
 
 template <typename DEQUE_DATA_TYPE>
-DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::operator[] (int index)
+DEQUE_DATA_TYPE & dsDEQUE<DEQUE_DATA_TYPE>::operator[] (int index) const
 {
    assert(length > index);
    
@@ -131,6 +133,17 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::operator[] (int index)
    }
 
    return temp->data;
+}
+
+template <typename DEST_CONTAINER_TYPE, typename SRC_CONTAINER_TYPE>
+void AppendContainer (DEST_CONTAINER_TYPE & dest, const SRC_CONTAINER_TYPE & src)
+{
+   int srclenght = src.GetLength();
+
+   for (int i = 0; i < srclenght; i++) {
+      dest.PushBack(src[i]);
+   }
+
 }
 
 #endif // _DEQUE_HPP_

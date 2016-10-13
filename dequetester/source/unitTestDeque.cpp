@@ -1,14 +1,13 @@
-#include "gtest/gtest.h"
-#include "../../deque/source/deque.h"
+#include <gtest/gtest.h>
 
-#pragma comment (lib, "GoogleTestCompilingLibrary.lib")
+#include "deque.h"
 
 TEST (changeData, pushBack)
 {
    dsDEQUE<int> q;
 
    q.PushBack(20);
-   ASSERT_EQ(q.GetTailData(), 20);
+   ASSERT_EQ(q.Back(), 20);
 
 }
 
@@ -17,7 +16,7 @@ TEST (changeData, pushFront)
    dsDEQUE<int> q;
 
    q.PushFront(30);
-   ASSERT_EQ(q.GetHeadData(), 30);
+   ASSERT_EQ(q.Front(), 30);
 }
 
 TEST (changeData, popBack)
@@ -71,11 +70,10 @@ TEST (changeData, findData)
       q.PushBack(i);
    }
 
-   ASSERT_EQ(q.GetIndexByData(10), q[10]);
-   ASSERT_EQ(q.GetIndexByData(100), -1);
+   ASSERT_EQ(q.FindIndexByData(10), q[10]);
+   ASSERT_EQ(q.FindIndexByData(100), -1);
 }
 
-/*
 TEST (changeData, appendDequeue)
 {
    dsDEQUE<int> q1;
@@ -83,10 +81,13 @@ TEST (changeData, appendDequeue)
 
    for (int i = 0; i < 30; i++) {
       q1.PushBack(i);
-      q2.PushBack(i);
+      q2.PushBack(30 - i);
    }
 
+   AppendContainer<dsDEQUE<int>, dsDEQUE<int>>(q1, q2);
+
+   ASSERT_EQ(2 * q2.GetLength() == q1.GetLength(), true);
 }
-*/
+
 
 
