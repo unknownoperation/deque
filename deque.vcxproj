@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="deque\source\containersFunctions.h" />
+    <ClInclude Include="deque\source\containersFunctions.hpp" />
     <ClInclude Include="deque\source\deque.h" />
     <ClInclude Include="deque\source\deque.hpp" />
     <ClInclude Include="deque\source\common.h" />

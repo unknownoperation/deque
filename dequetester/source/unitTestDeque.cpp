@@ -70,8 +70,8 @@ TEST (changeData, findData)
       q.PushBack(i);
    }
 
-   ASSERT_EQ(q.FindIndexByData(10), q[10]);
-   ASSERT_EQ(q.FindIndexByData(100), -1);
+   ASSERT_EQ(FindIndexByData(q, 10), 10);
+   ASSERT_EQ(FindIndexByData(q, 100), -1);
 }
 
 TEST (changeData, appendDequeue)
@@ -84,10 +84,23 @@ TEST (changeData, appendDequeue)
       q2.PushBack(30 - i);
    }
 
-   AppendContainer<dsDEQUE<int>, dsDEQUE<int>>(q1, q2);
+   AppendContainer(q1, q2);
 
    ASSERT_EQ(2 * q2.GetLength() == q1.GetLength(), true);
 }
 
+TEST (moveCheck, constructor)
+{
+  dsDEQUE<int> q1;
 
+   for (int i = 0; i < 30; i++) {
+      q1.PushBack(i);
+   }
+
+    dsDEQUE<int> q2(q1);
+
+    dsDEQUE<int> q3(std::move(q1));
+
+    ASSERT_EQ(q3[5], q2[5]);
+}
 

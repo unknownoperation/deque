@@ -69,7 +69,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);E:\GTEST\GoogleTestCompilingLibrary\Debug;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\GTEST\gtest-1.7.0;E:\GTEST\gtest-1.7.0\include;$(IncludePath);E:\projects\!politech2form\saber\deque\deque.git\deque\source</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\GTEST\gtest-1.7.0;E:\GTEST\gtest-1.7.0\include;$(IncludePath);..\deque\source</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>E:\GTEST\gtest-1.7.0;E:\GTEST\gtest-1.7.0\include;$(IncludePath);E:\projects\!politech2form\saber\deque\deque.git\deque\source</IncludePath>
+    <IncludePath>E:\GTEST\gtest-1.7.0;E:\GTEST\gtest-1.7.0\include;$(IncludePath);..\deque\source</IncludePath>
     <LibraryPath>E:\GTEST\GoogleTestCompilingLibrary\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
