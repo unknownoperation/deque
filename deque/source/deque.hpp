@@ -7,11 +7,41 @@ dsDEQUE<DEQUE_DATA_TYPE>::dsDEQUE(const dsDEQUE & src)
    head = tail = NULL;
    length = 0;
    
-   DLIST * tempptr = src.head;
-   while (tempptr != NULL) {
-      PushBack(tempptr->data);
-      tempptr = tempptr->next;
+   DLIST * it = src.head;
+   while (it != NULL) {
+      PushBack(it->data);
+      it = it->next;
    }
+}
+template <class DEQUE_DATA_TYPE> 
+dsDEQUE<DEQUE_DATA_TYPE>  & dsDEQUE<DEQUE_DATA_TYPE>::operator= (dsDEQUE<DEQUE_DATA_TYPE> && src)
+{
+   if (this != &src) {
+      Clear();
+
+      head   = src.head;
+      tail   = src.tail;
+      length = src.length;
+
+      src.head   = NULL;
+      src.tail   = NULL;
+      src.length = 0;
+   }
+   return *this;
+}
+template <class DEQUE_DATA_TYPE> 
+dsDEQUE<DEQUE_DATA_TYPE> & dsDEQUE<DEQUE_DATA_TYPE>::operator= (const dsDEQUE<DEQUE_DATA_TYPE> & src)
+{
+   if (this != &src) {
+      Clear();
+      DLIST * it = src.head;
+
+      while (it != NULL) {
+         PushBack(it->data);
+         it = it->next;
+      }
+   }
+   return *this;
 }
 
 template <class DEQUE_DATA_TYPE> 
@@ -143,31 +173,31 @@ const DEQUE_DATA_TYPE & dsDEQUE<DEQUE_DATA_TYPE>::operator[] (int index) const
 }
 
 template <class DEQUE_DATA_TYPE>
-void AppendContainer (dsDEQUE<DEQUE_DATA_TYPE> & dest, dsDEQUE<DEQUE_DATA_TYPE> & src)
+void AppendContainer (dsDEQUE<DEQUE_DATA_TYPE> & dest, const dsDEQUE<DEQUE_DATA_TYPE> & src)
 {
-   dsDEQUE<DEQUE_DATA_TYPE>::DLIST * tempptr = src.head;
+   dsDEQUE<DEQUE_DATA_TYPE>::DLIST * it = src.head;
 
-   while (tempptr != NULL) {
-      dest.PushBack(tempptr->data);
-      tempptr = tempptr->next;
+   while (it != NULL) {
+      dest.PushBack(it->data);
+      it = it->next;
    }
 }
 
 template <class DEQUE_DATA_TYPE> 
 int FindIndexByData (const dsDEQUE<DEQUE_DATA_TYPE> & src, const DEQUE_DATA_TYPE & data)
 {  
-   dsDEQUE<DEQUE_DATA_TYPE>::DLIST * tempptr = src.head;
+   dsDEQUE<DEQUE_DATA_TYPE>::DLIST * it = src.head;
 
    if (src.head == NULL) {
       return -1;
    }
 
    int i = 0;
-   while (tempptr != src.tail) {
-      if (tempptr->data == data) {
+   while (it != src.tail) {
+      if (it->data == data) {
          return i;
       }
-      tempptr = tempptr->next;
+      it = it->next;
       i++;
    }
    return -1;

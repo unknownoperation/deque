@@ -89,6 +89,22 @@ TEST (changeData, appendDequeue)
    ASSERT_EQ(2 * q2.GetLength() == q1.GetLength(), true);
 }
 
+TEST (changeData, assignment)
+{
+   dsDEQUE<int> q1;
+   dsDEQUE<int> q2;
+
+   for (int i = 0; i < 30; i++) {
+      q1.PushBack(i);
+      q2.PushBack(30 - i);
+   }
+
+  q1 = q2;
+
+   ASSERT_EQ(q1[5], q2[5]);
+
+}
+
 TEST (moveCheck, constructor)
 {
   dsDEQUE<int> q1;
@@ -104,3 +120,15 @@ TEST (moveCheck, constructor)
     ASSERT_EQ(q3[5], q2[5]);
 }
 
+TEST (moveCheck, assignment)
+{
+  dsDEQUE<int> q1;
+
+   for (int i = 0; i < 30; i++) {
+      q1.PushBack(i);
+   }
+
+    dsDEQUE<int> q2 = std::move(q1);
+
+    ASSERT_EQ(q2[5], 5);
+}

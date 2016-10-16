@@ -4,7 +4,7 @@
 #include "common.h"
 
 template <class DEST_CONTAINER_TYPE, class SRC_CONTAINER_TYPE>
-void AppendContainer (DEST_CONTAINER_TYPE & dest, SRC_CONTAINER_TYPE & src)
+void AppendContainer (DEST_CONTAINER_TYPE & dest, const SRC_CONTAINER_TYPE & src)
 {
    int srclenght = src.GetLength();
 

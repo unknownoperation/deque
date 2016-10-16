@@ -24,10 +24,10 @@
     <ClInclude Include="deque\source\common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="deque\source\containersFunctions.h">
+    <ClInclude Include="deque\source\containers_functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="deque\source\containersFunctions.hpp">
+    <ClInclude Include="deque\source\containers_functions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
