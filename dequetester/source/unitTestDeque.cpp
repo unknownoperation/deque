@@ -107,17 +107,17 @@ TEST (changeData, assignment)
 
 TEST (moveCheck, constructor)
 {
-  dsDEQUE<int> q1;
+   dsDEQUE<int> q1;
 
    for (int i = 0; i < 30; i++) {
       q1.PushBack(i);
    }
 
-    dsDEQUE<int> q2(q1);
+   dsDEQUE<int> q2(q1);
 
-    dsDEQUE<int> q3(std::move(q1));
+   dsDEQUE<int> q3(std::move(q1));
 
-    ASSERT_EQ(q3[5], q2[5]);
+   ASSERT_EQ(q3[5], q2[5]);
 }
 
 TEST (moveCheck, assignment)

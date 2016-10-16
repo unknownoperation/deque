@@ -24,18 +24,19 @@ public:
    const DEQUE_DATA_TYPE & Front (void) const { return head->data; }
    const DEQUE_DATA_TYPE & Back  (void) const { return tail->data; }
 
-   DEQUE_DATA_TYPE       & operator[]  (int index);
-   const DEQUE_DATA_TYPE & operator[]  (int index)       const;
-   dsDEQUE               & operator=   (dsDEQUE && src);
-   dsDEQUE               & operator=   (const dsDEQUE & src);
+   DEQUE_DATA_TYPE       & operator[] (int index);
+   const DEQUE_DATA_TYPE & operator[] (int index) const;
+   dsDEQUE               & operator=  (dsDEQUE && src);
+   dsDEQUE               & operator=  (const dsDEQUE & src);
 
-   int  GetLength       (void) const  { return length; }
-   bool IsEmpty         (void) const;
-   void Clear           (void);
+   int  GetLength (void) const  { return length; }
+   bool IsEmpty   (void) const;
+   void Clear     (void);
 
 private:
    struct DLIST {
       DEQUE_DATA_TYPE data;
+
       DLIST * next;
       DLIST * prev;
    };

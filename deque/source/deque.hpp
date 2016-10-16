@@ -1,20 +1,21 @@
 #ifndef _DEQUE_HPP_
 #define _DEQUE_HPP_
 
-template <class DEQUE_DATA_TYPE> 
-dsDEQUE<DEQUE_DATA_TYPE>::dsDEQUE(const dsDEQUE & src)
+template <class DEQUE_DATA_TYPE>
+dsDEQUE<DEQUE_DATA_TYPE>::dsDEQUE (const dsDEQUE & src)
 {
    head = tail = NULL;
    length = 0;
-   
+
    DLIST * it = src.head;
    while (it != NULL) {
       PushBack(it->data);
       it = it->next;
    }
 }
-template <class DEQUE_DATA_TYPE> 
-dsDEQUE<DEQUE_DATA_TYPE>  & dsDEQUE<DEQUE_DATA_TYPE>::operator= (dsDEQUE<DEQUE_DATA_TYPE> && src)
+
+template <class DEQUE_DATA_TYPE>
+dsDEQUE<DEQUE_DATA_TYPE> & dsDEQUE<DEQUE_DATA_TYPE>::operator= (dsDEQUE<DEQUE_DATA_TYPE> && src)
 {
    if (this != &src) {
       Clear();
@@ -29,6 +30,7 @@ dsDEQUE<DEQUE_DATA_TYPE>  & dsDEQUE<DEQUE_DATA_TYPE>::operator= (dsDEQUE<DEQUE_D
    }
    return *this;
 }
+
 template <class DEQUE_DATA_TYPE> 
 dsDEQUE<DEQUE_DATA_TYPE> & dsDEQUE<DEQUE_DATA_TYPE>::operator= (const dsDEQUE<DEQUE_DATA_TYPE> & src)
 {
@@ -47,20 +49,20 @@ dsDEQUE<DEQUE_DATA_TYPE> & dsDEQUE<DEQUE_DATA_TYPE>::operator= (const dsDEQUE<DE
 template <class DEQUE_DATA_TYPE> 
 void dsDEQUE<DEQUE_DATA_TYPE>::PushBack (const DEQUE_DATA_TYPE & newData)
 {
-  if (tail == NULL) {
-     tail = new DLIST;
-     head = tail;
-     tail->prev = NULL;
-  } else {
-     tail->next = new DLIST;
-     DLIST * tempPointer = tail;
-     tail = tail->next;
-     tail->prev = tempPointer;
-  }
+   if (tail == NULL) {
+      tail = new DLIST;
+      head = tail;
+      tail->prev = NULL;
+   } else {
+      tail->next = new DLIST;
+      DLIST * tempPointer = tail;
+      tail = tail->next;
+      tail->prev = tempPointer;
+   }
 
-  tail->data = newData;
-  tail->next = NULL;
-  length++;
+   tail->data = newData;
+   tail->next = NULL;
+   length++;
 }
 
 template <class DEQUE_DATA_TYPE> 
@@ -86,18 +88,18 @@ template <class DEQUE_DATA_TYPE>
 DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopBack (void)
 {
    assert(tail != NULL);
-  
+
    DEQUE_DATA_TYPE returnData = tail->data;
    DLIST * p = tail;
    tail = tail->prev;
    delete(p);
-  
+
    if (tail == NULL) {
-     head = NULL;
+      head = NULL;
    }
-  
+
    length--;
-  
+
    return returnData;
 }
 
@@ -114,7 +116,7 @@ DEQUE_DATA_TYPE dsDEQUE<DEQUE_DATA_TYPE>::PopFront (void)
    delete(p);
    
    if (head == NULL) {
-     tail = NULL;
+      tail = NULL;
    } else {
       head->prev = NULL;
    }
@@ -146,7 +148,7 @@ template <class DEQUE_DATA_TYPE>
 DEQUE_DATA_TYPE & dsDEQUE<DEQUE_DATA_TYPE>::operator[] (int index)
 {
    assert(length > index);
-   
+
    int i = 0;
    DLIST * temp = head;
 
@@ -161,7 +163,7 @@ template <class DEQUE_DATA_TYPE>
 const DEQUE_DATA_TYPE & dsDEQUE<DEQUE_DATA_TYPE>::operator[] (int index) const
 {
    assert(length > index);
-   
+
    int i = 0;
    DLIST * temp = head;
 
@@ -185,12 +187,8 @@ void AppendContainer (dsDEQUE<DEQUE_DATA_TYPE> & dest, const dsDEQUE<DEQUE_DATA_
 
 template <class DEQUE_DATA_TYPE> 
 int FindIndexByData (const dsDEQUE<DEQUE_DATA_TYPE> & src, const DEQUE_DATA_TYPE & data)
-{  
+{
    dsDEQUE<DEQUE_DATA_TYPE>::DLIST * it = src.head;
-
-   if (src.head == NULL) {
-      return -1;
-   }
 
    int i = 0;
    while (it != src.tail) {
