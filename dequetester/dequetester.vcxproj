@@ -151,7 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\unitTestDeque.cpp" />
+    <ClCompile Include="source\unit_test_deque_list.cpp" />
+    <ClCompile Include="unit_test_deque_array.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

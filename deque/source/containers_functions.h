@@ -1,5 +1,5 @@
-#ifndef _CONTAINERSFUNCTIONS_H_
-#define _CONTAINERSFUNCTIONS_H_
+#ifndef _CONTAINERS_FUNCTIONS_H_
+#define _CONTAINERS_FUNCTIONS_H_
 
 #include "common.h"
 
@@ -12,4 +12,4 @@ int FindIndexByData (const SRC_CONTAINER_TYPE & src, const CONTAINER_DATA_TYPE &
 
 #include "containers_functions.hpp"
 
-#endif // _CONTAINERSFUNCTIONS_H_
+#endif // _CONTAINERS_FUNCTIONS_H_

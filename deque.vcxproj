@@ -13,8 +13,10 @@
   <ItemGroup>
     <ClInclude Include="deque\source\containers_functions.h" />
     <ClInclude Include="deque\source\containers_functions.hpp" />
-    <ClInclude Include="deque\source\deque.h" />
-    <ClInclude Include="deque\source\deque.hpp" />
+    <ClInclude Include="deque\source\deque_array.h" />
+    <ClInclude Include="deque\source\deque_array.hpp" />
+    <ClInclude Include="deque\source\deque_list.h" />
+    <ClInclude Include="deque\source\deque_list.hpp" />
     <ClInclude Include="deque\source\common.h" />
   </ItemGroup>
   <ItemGroup>

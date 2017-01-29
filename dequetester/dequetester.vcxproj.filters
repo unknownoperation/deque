@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\unitTestDeque.cpp">
+    <ClCompile Include="source\unit_test_deque_list.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unit_test_deque_array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

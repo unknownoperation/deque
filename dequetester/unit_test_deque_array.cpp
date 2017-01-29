@@ -1,27 +1,26 @@
 #include <gtest/gtest.h>
 
-#include "deque.h"
+#include "deque_array.h"
 
-TEST (changeData, pushBack)
+TEST (dequeArray, pushBack)
 {
-   dsDEQUE<int> q;
+   dsDEQUEARRAY<int> q;
 
    q.PushBack(20);
    ASSERT_EQ(q.Back(), 20);
-
 }
 
-TEST (changeData, pushFront)
+TEST (dequeArray, pushFront)
 {
-   dsDEQUE<int> q;
+   dsDEQUEARRAY<int> q;
 
    q.PushFront(30);
    ASSERT_EQ(q.Front(), 30);
 }
 
-TEST (changeData, popBack)
+TEST (dequeArray, popBack)
 {
-   dsDEQUE<int> q;
+   dsDEQUEARRAY<int> q;
 
    q.PushBack(20);
 
@@ -29,9 +28,9 @@ TEST (changeData, popBack)
    ASSERT_EQ(q.IsEmpty(), true);
 }
 
-TEST (changeData, popFront)
+TEST (dequeArray, popFront)
 {
-   dsDEQUE<int> q;
+   dsDEQUEARRAY<int> q;
 
    q.PushFront(30);
 
@@ -40,9 +39,9 @@ TEST (changeData, popFront)
    ASSERT_EQ(q.IsEmpty(), true);
 }
 
-TEST (changeData, length)
+TEST (dequeArray, length)
 {
-   dsDEQUE<int> q;
+   dsDEQUEARRAY<int> q;
 
    for (int i = 0; i < 30; i++) {
       q.PushFront(30);
@@ -51,9 +50,9 @@ TEST (changeData, length)
    ASSERT_EQ(q.GetLength(), 30);
 }
 
-TEST (changeData, getDataByIndex)
+TEST (dequeArray, getDataByIndex)
 {
-   dsDEQUE<int> q;
+   dsDEQUEARRAY<int> q;
 
    for (int i = 0; i < 30; i++) {
       q.PushBack(i);
@@ -62,9 +61,9 @@ TEST (changeData, getDataByIndex)
    ASSERT_EQ(q[4], 4);
 }
 
-TEST (changeData, findData)
+TEST (dequeArray, findData)
 {
-   dsDEQUE<int> q;
+   dsDEQUEARRAY<int> q;
 
    for (int i = 0; i < 30; i++) {
       q.PushBack(i);
@@ -74,10 +73,10 @@ TEST (changeData, findData)
    ASSERT_EQ(FindIndexByData(q, 100), -1);
 }
 
-TEST (changeData, appendDequeue)
+TEST (dequeArray, appendDequeue)
 {
-   dsDEQUE<int> q1;
-   dsDEQUE<int> q2;
+   dsDEQUEARRAY<int> q1;
+   dsDEQUEARRAY<int> q2;
 
    for (int i = 0; i < 30; i++) {
       q1.PushBack(i);
@@ -89,10 +88,10 @@ TEST (changeData, appendDequeue)
    ASSERT_EQ(2 * q2.GetLength() == q1.GetLength(), true);
 }
 
-TEST (changeData, assignment)
+TEST (dequeArray, assignment)
 {
-   dsDEQUE<int> q1;
-   dsDEQUE<int> q2;
+   dsDEQUEARRAY<int> q1;
+   dsDEQUEARRAY<int> q2;
 
    for (int i = 0; i < 30; i++) {
       q1.PushBack(i);
@@ -105,30 +104,30 @@ TEST (changeData, assignment)
 
 }
 
-TEST (moveCheck, constructor)
+TEST (dequeArray, moveConstructor)
 {
-   dsDEQUE<int> q1;
+   dsDEQUEARRAY<int> q1;
 
    for (int i = 0; i < 30; i++) {
       q1.PushBack(i);
    }
 
-   dsDEQUE<int> q2(q1);
+   dsDEQUEARRAY<int> q2(q1);
 
-   dsDEQUE<int> q3(std::move(q1));
+   dsDEQUEARRAY<int> q3(std::move(q1));
 
    ASSERT_EQ(q3[5], q2[5]);
 }
 
-TEST (moveCheck, assignment)
+TEST (dequeArray, moveAssignment)
 {
-  dsDEQUE<int> q1;
+  dsDEQUEARRAY<int> q1;
 
    for (int i = 0; i < 30; i++) {
       q1.PushBack(i);
    }
 
-    dsDEQUE<int> q2 = std::move(q1);
+    dsDEQUEARRAY<int> q2 = std::move(q1);
 
     ASSERT_EQ(q2[5], 5);
 }
