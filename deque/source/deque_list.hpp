@@ -189,6 +189,16 @@ dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE> & dsDEQUE_LIST_CONST_ITERATOR<DEQUE
    return *this;
 }
 
+template <class DEQUE_DATA_TYPE>
+dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE> dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE>::operator++ (int)
+{
+   dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE> temp = *this;
+
+   ++(*this);
+
+   return temp;
+}
+
 template <class DEQUE_DATA_TYPE> 
 DEQUE_DATA_TYPE & dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE>::operator* (void)
 {
@@ -200,6 +210,16 @@ dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE> & dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE>:
    assert(curElement != NULL);
 
    curElement = curElement->next;
+}
+
+template <class DEQUE_DATA_TYPE>
+dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE> dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE>::operator++ (int)
+{
+   dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE> temp = *this;
+
+   ++(*this);
+
+   return temp;
 }
 
 #endif // _DEQUE_LIST_HPP_

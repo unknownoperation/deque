@@ -2,54 +2,42 @@
 #define _DEQUE_ARRAY_HPP_
 
 #include <stdlib.h>
-
-template <class DEQUE_DATA_TYPE>
-dsDEQUEARRAY<DEQUE_DATA_TYPE>::dsDEQUEARRAY (const dsDEQUEARRAY<DEQUE_DATA_TYPE> & src)
-{
-   head = tail = 0;
-   allocatedSize = 0;
-   reallocSize = src.reallocSize;
-
-   dsDEQUEARRAY<DEQUE_DATA_TYPE>::CONST_ITERATOR it = src.Begin();
-
-   for (; it != (src.End()); ++it) {
-      PushBack(*(it));
-   }
-}
-
 template <class DEQUE_DATA_TYPE>
 void dsDEQUEARRAY<DEQUE_DATA_TYPE>::PushBack (const DEQUE_DATA_TYPE & newData)
 {
    if (allocatedSize == 0) {
-      data = new DEQUE_DATA_TYPE[reallocSize];
-      assert(data != NULL);
+      int reallocSize = 5;
+      data = static_cast<DEQUE_DATA_TYPE *>(malloc(sizeof(DEQUE_DATA_TYPE) * reallocSize));
       allocatedSize = reallocSize;
    } else if (head == (tail + 1) % allocatedSize || tail == (head + 1) % allocatedSize) {
+      int reallocSize = 2 * GetLength();
       Linearize(reallocSize);
    }
-   data[++tail] = newData;
+   new (data + (++tail)) DEQUE_DATA_TYPE(newData);
 }
 
 template <class DEQUE_DATA_TYPE>
 void dsDEQUEARRAY<DEQUE_DATA_TYPE>::PushFront (const DEQUE_DATA_TYPE & newData)
 {
    if (allocatedSize == 0) {
-      data = new DEQUE_DATA_TYPE[reallocSize];
-      assert(data != NULL);
+      int reallocSize = 5;
+      data = static_cast<DEQUE_DATA_TYPE *>(malloc(sizeof(DEQUE_DATA_TYPE) * reallocSize));
       allocatedSize = reallocSize;
    } else if (head == (tail + 1) % allocatedSize || tail == (head - 1 + allocatedSize) % allocatedSize) {
+      int reallocSize = 2 * GetLength();
       Linearize(reallocSize);
    }
-   data[head] = newData;
+   new (data + (head)) DEQUE_DATA_TYPE(newData);
    head = (head - 1 + allocatedSize) % allocatedSize;
 }
 
 template <class DEQUE_DATA_TYPE>
 DEQUE_DATA_TYPE dsDEQUEARRAY<DEQUE_DATA_TYPE>::PopBack (void)
 {
-   assert(GetLength() > 0);
+   assert(!IsEmpty());
 
-   DEQUE_DATA_TYPE el = data[tail];
+   DEQUE_DATA_TYPE el(std::move(data[tail]));
+   data[tail].~DEQUE_DATA_TYPE();
 
    tail = (tail - 1 + allocatedSize) % allocatedSize;
 
@@ -59,9 +47,10 @@ DEQUE_DATA_TYPE dsDEQUEARRAY<DEQUE_DATA_TYPE>::PopBack (void)
 template <class DEQUE_DATA_TYPE>
 DEQUE_DATA_TYPE dsDEQUEARRAY<DEQUE_DATA_TYPE>::PopFront (void)
 {
-   assert(GetLength() > 0);
+   assert(!IsEmpty());
 
-   DEQUE_DATA_TYPE el = data[(head + 1) % allocatedSize];
+   DEQUE_DATA_TYPE el(std::move(data[(head + 1) % allocatedSize]));
+   data[(head + 1) % allocatedSize].~DEQUE_DATA_TYPE();
 
    head = (head + 1) % allocatedSize;
 
@@ -98,7 +87,6 @@ dsDEQUEARRAY<DEQUE_DATA_TYPE> & dsDEQUEARRAY<DEQUE_DATA_TYPE>::operator=  (dsDEQ
 
       length        = src.length;
       allocatedSize = src.allocatedSize;
-      reallocSize   = src.reallocSize;
       data          = src.data;
 
       src.length        = 0;
@@ -113,8 +101,6 @@ dsDEQUEARRAY<DEQUE_DATA_TYPE> & dsDEQUEARRAY<DEQUE_DATA_TYPE>::operator=  (const
 {
    Clear();
 
-   reallocSize = src.reallocSize;
-
    dsDEQUEARRAY<DEQUE_DATA_TYPE>::CONST_ITERATOR it = src.Begin();
 
    for (; it != (src.End()); ++it) {
@@ -127,10 +113,7 @@ dsDEQUEARRAY<DEQUE_DATA_TYPE> & dsDEQUEARRAY<DEQUE_DATA_TYPE>::operator=  (const
 template <class DEQUE_DATA_TYPE>
 bool dsDEQUEARRAY<DEQUE_DATA_TYPE>::IsEmpty (void) const
 {
-   if (GetLength() >= 1) {
-      return false;
-   }
-   return true;
+   return GetLength() == 0;
 }
 
 template <class DEQUE_DATA_TYPE>
@@ -146,24 +129,27 @@ int dsDEQUEARRAY<DEQUE_DATA_TYPE>::GetLength (void) const
 template <class DEQUE_DATA_TYPE>
 void dsDEQUEARRAY<DEQUE_DATA_TYPE>::Clear (void)
 {
-   head = tail = 0;
+   while (head != tail) {
+      PopBack();
+   }
 }
 
 template <class DEQUE_DATA_TYPE>
 void dsDEQUEARRAY<DEQUE_DATA_TYPE>::Linearize (size_t additionalSize)
 {
    int length = GetLength();
-   DEQUE_DATA_TYPE * temp = new DEQUE_DATA_TYPE[length + 1 + additionalSize];
-
-   assert(temp != NULL);
+   DEQUE_DATA_TYPE * temp = static_cast<DEQUE_DATA_TYPE *>(malloc(sizeof(DEQUE_DATA_TYPE) * (length + 1 + additionalSize)));
 
    int j = 0;
    for (int i = head; i != tail; i = (i + 1) % allocatedSize, j++) {
-      temp[j] = data[i];
+      new (temp + j) DEQUE_DATA_TYPE(std::move(data[i]));
    }
-   temp[j] = data[tail];
+   new (temp + j) DEQUE_DATA_TYPE(std::move(data[tail]));
 
-   delete(data);
+   for (int i = head; i != tail; i = (i + 1) % allocatedSize) {
+      data[i].~DEQUE_DATA_TYPE();
+   }
+   free(data);
 
    allocatedSize = length + 1 + additionalSize;
    data = temp;
@@ -184,10 +170,20 @@ dsDEQUE_ARRAY_ITERATOR<DEQUE_DATA_TYPE> & dsDEQUE_ARRAY_ITERATOR<DEQUE_DATA_TYPE
    if (index == deque->allocatedSize - 1 && index != tail) {
       index = 0;
    } else {
-      index++;
+      ++index;
    }
    
    return *this;
+}
+
+template <class DEQUE_DATA_TYPE>
+dsDEQUE_ARRAY_ITERATOR<DEQUE_DATA_TYPE> dsDEQUE_ARRAY_ITERATOR<DEQUE_DATA_TYPE>::operator++ (int)
+{
+   dsDEQUE_ARRAY_ITERATOR<DEQUE_DATA_TYPE> temp = *this;
+
+   ++(*this);
+
+   return temp;
 }
 
 template <class DEQUE_DATA_TYPE>
@@ -202,10 +198,20 @@ dsDEQUE_ARRAY_CONST_ITERATOR<DEQUE_DATA_TYPE> & dsDEQUE_ARRAY_CONST_ITERATOR<DEQ
    if (index == deque.allocatedSize - 1) {
       index = 0;
    } else {
-      index++;
+      ++index;
    }
 
    return *this;
+}
+
+template <class DEQUE_DATA_TYPE>
+dsDEQUE_ARRAY_CONST_ITERATOR<DEQUE_DATA_TYPE> dsDEQUE_ARRAY_CONST_ITERATOR<DEQUE_DATA_TYPE>::operator++ (int)
+{
+   dsDEQUE_ARRAY_CONST_ITERATOR<DEQUE_DATA_TYPE> temp = *this;
+
+   ++(*this);
+
+   return temp;
 }
 
 #endif // _DEQUE_ARRAY_HPP_

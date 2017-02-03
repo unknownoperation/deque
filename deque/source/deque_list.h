@@ -45,11 +45,11 @@ public:
    bool IsEmpty   (void) const;
    void Clear     (void);
 
-   ITERATOR       Begin (void)       { return *(new ITERATOR(head)); }
-   CONST_ITERATOR Begin (void) const { return *(new CONST_ITERATOR(head)); }
+   ITERATOR       Begin (void)       { return ITERATOR(head); }
+   CONST_ITERATOR Begin (void) const { return CONST_ITERATOR(head); }
    
-   ITERATOR       End (void)       { return *(new ITERATOR(NULL)); }
-   CONST_ITERATOR End (void) const { return *(new CONST_ITERATOR(NULL)); }
+   ITERATOR       End (void)       { return ITERATOR(NULL); }
+   CONST_ITERATOR End (void) const { return CONST_ITERATOR(NULL); }
 
 private:
    struct DLIST {
@@ -68,15 +68,16 @@ private:
 template <class DEQUE_DATA_TYPE> 
 class dsDEQUE_LIST_ITERATOR {
 public:
-   dsDEQUE_LIST_ITERATOR () : curElement(NULL) {};
+   dsDEQUE_LIST_ITERATOR (void) : curElement(NULL) {};
    dsDEQUE_LIST_ITERATOR (typename dsDEQUELIST<DEQUE_DATA_TYPE>::DLIST * el) : curElement(el) {};
 
    dsDEQUE_LIST_ITERATOR  (const dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE> & it) = default;
-   ~dsDEQUE_LIST_ITERATOR ()                                                  = default;
+   ~dsDEQUE_LIST_ITERATOR (void)                                              = default;
 
    dsDEQUE_LIST_ITERATOR & operator=  (const dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE> & it) = default;
    DEQUE_DATA_TYPE       & operator*  (void);
    dsDEQUE_LIST_ITERATOR & operator++ (void);
+   dsDEQUE_LIST_ITERATOR   operator++ (int);
 
    bool operator== (const dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE> & it) const { return (curElement == it.curElement); }
    bool operator!= (const dsDEQUE_LIST_ITERATOR<DEQUE_DATA_TYPE> & it) const { return (curElement != it.curElement); }
@@ -87,15 +88,16 @@ private:
 template <class DEQUE_DATA_TYPE>
 class dsDEQUE_LIST_CONST_ITERATOR {
 public:
-   dsDEQUE_LIST_CONST_ITERATOR () : curElement(NULL) {};
+   dsDEQUE_LIST_CONST_ITERATOR (void) : curElement(NULL) {};
    dsDEQUE_LIST_CONST_ITERATOR (typename dsDEQUELIST<DEQUE_DATA_TYPE>::DLIST * el) : curElement(el) {};
 
    dsDEQUE_LIST_CONST_ITERATOR  (const dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE> & it) = default;
-   ~dsDEQUE_LIST_CONST_ITERATOR ()                                                        = default;
+   ~dsDEQUE_LIST_CONST_ITERATOR (void)                                                    = default;
   
    dsDEQUE_LIST_CONST_ITERATOR & operator= (const dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE> & it) = default;
    const DEQUE_DATA_TYPE       & operator*  (void) const;
    dsDEQUE_LIST_CONST_ITERATOR & operator++ (void);
+   dsDEQUE_LIST_CONST_ITERATOR   operator++ (int);
 
    bool operator== (const dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE> & it) const { return (curElement == it.curElement); }
    bool operator!= (const dsDEQUE_LIST_CONST_ITERATOR<DEQUE_DATA_TYPE> & it) const { return (curElement != it.curElement); }
